@@ -49,4 +49,14 @@ class TaskController extends Controller {
 
         return response()->json( ['message' => 'Task Updated Successfully', 'status' => true, 'data' => $task] );
     }
+
+    public function TaskDelete( Request $request, $id ) {
+        $task = Task::where( 'id', $id )
+            ->where( 'user_id', $request->user()->id )
+            ->first();
+
+        $task->delete();
+
+        return response()->json( ['message' => 'Task Deleted Successfully', 'status' => true, 'data' => $task] );
+    }
 }
