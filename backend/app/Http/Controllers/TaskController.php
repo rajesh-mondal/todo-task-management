@@ -6,6 +6,11 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller {
+    public function TaskList( Request $request ) {
+        $id = $request->user()->id;
+        return Task::where( 'user_id', $id )->get();
+    }
+
     public function TaskCreate( Request $request ) {
         $data = $request->validate( [
             'title'       => 'required|string|max:255',
@@ -58,5 +63,17 @@ class TaskController extends Controller {
         $task->delete();
 
         return response()->json( ['message' => 'Task Deleted Successfully', 'status' => true, 'data' => $task] );
+    }
+
+    public function TaskSummary( Request $request ) {
+        $task = Task::where( 'user_id', $request->user()->id )->get();
+
+        $summary = [
+            'total'       => $task->count(),
+            'by_status'   => $task->groupBy( 'status' )->map->count(),
+            'by_priority' => $task->groupBy( 'priority' )->map->count(),
+        ];
+
+        return response()->json( ['message' => 'Task Summary Displayed', 'status' => true, 'data' => $summary] );
     }
 }
