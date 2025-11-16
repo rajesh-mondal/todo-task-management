@@ -22,4 +22,5 @@ Route::middleware( ['auth:sanctum'] )->group( function () {
 // Task Manager API : After Login
 Route::middleware( ['auth:sanctum'] )->group( function () {
     Route::post( '/tasks/create', [TaskController::class, 'TaskCreate'] );
+    Route::post( '/tasks/update/{id}', [TaskController::class, 'TaskUpdate'] );
 } );

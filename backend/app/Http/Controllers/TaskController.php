@@ -24,4 +24,29 @@ class TaskController extends Controller {
 
         return response()->json( ['message' => 'Task Created Successfully', 'status' => true, 'data' => $task] );
     }
+
+    public function TaskUpdate( Request $request, $id ) {
+        $data = $request->validate( [
+            'title'       => 'sometimes|required|string|max:255',
+            'description' => 'sometimes|nullable|string',
+            'status'      => 'sometimes|required|in:pending,completed,in-progress',
+            'priority'    => 'sometimes|required|in:low,medium,high',
+        ] );
+
+        $task = Task::where( 'id', $id )
+            ->where( 'user_id', $request->user()->id )
+            ->first();
+
+        // If task not found, return error
+        if ( !$task ) {
+            return response()->json( [
+                'message' => 'Task Not Found',
+                'status'  => false,
+            ], 404 );
+        }
+
+        $task->update( $data );
+
+        return response()->json( ['message' => 'Task Updated Successfully', 'status' => true, 'data' => $task] );
+    }
 }
