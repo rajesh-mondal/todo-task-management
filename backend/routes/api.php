@@ -8,5 +8,11 @@ Route::get( '/user', function ( Request $request ) {
     return $request->user();
 } )->middleware( 'auth:sanctum' );
 
+// Before Login
 Route::post( '/register', [AuthController::class, 'register'] );
 Route::post( '/login', [AuthController::class, 'login'] );
+Route::get( '/login', fn() => response()->json( ['message' => 'Please Login'], 401 ) )->name( 'login' );
+
+Route::middleware( ['auth:sanctum'] )->group( function () {
+    Route::post( '/logout', [AuthController::class, 'logout'] );
+} );
