@@ -7,13 +7,29 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // stores backend validation errors
+  const [errors, setErrors] = useState({});
+
+  // for showing general failure message
+  const [serverError, setServerError] = useState("");
+
   const registerUser = async () => {
+    setErrors({});
+    setServerError("");
+
     try {
       const res = await API.post("/register", { name, email, password });
+
       alert(res.data.message);
+
       window.location.href = "/login";
-    } catch {
-      alert("Registration failed");
+    } catch (error) {
+      if (error.response && error.response.status === 422) {
+        setErrors(error.response.data.errors);
+        return;
+      }
+
+      setServerError("Registration failed. Please try again.");
     }
   };
 
@@ -27,18 +43,30 @@ export default function Register() {
           Join us and start your journey
         </p>
 
+        {serverError && (
+          <p className="bg-red-100 text-red-700 p-2 rounded mb-4 text-sm">
+            {serverError}
+          </p>
+        )}
+
         <div className="space-y-4">
           <input
             className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition"
             placeholder="Full Name"
             onChange={(e) => setName(e.target.value)}
           />
+          {errors.name && (
+            <p className="text-red-600 text-sm">{errors.name[0]}</p>
+          )}
 
           <input
             className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition"
             placeholder="Email Address"
             onChange={(e) => setEmail(e.target.value)}
           />
+          {errors.email && (
+            <p className="text-red-600 text-sm">{errors.email[0]}</p>
+          )}
 
           <input
             className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition"
@@ -46,6 +74,9 @@ export default function Register() {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
+          {errors.password && (
+            <p className="text-red-600 text-sm">{errors.password[0]}</p>
+          )}
 
           <button
             onClick={registerUser}
