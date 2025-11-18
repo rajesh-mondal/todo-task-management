@@ -76,4 +76,9 @@ class TaskController extends Controller {
 
         return response()->json( ['message' => 'Task Summary Displayed', 'status' => true, 'data' => $summary] );
     }
+
+    public function TaskSingle($id)
+    {
+        return Task::find($id);
+    }
 }

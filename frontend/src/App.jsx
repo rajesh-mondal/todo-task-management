@@ -3,6 +3,7 @@ import CreateTask from "./pages/CreateTask";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Tasks from "./pages/Tasks";
+import UpdateTask from "./pages/UpdateTask";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Tasks />} />
         <Route path="/create-task" element={<CreateTask />} />
+        <Route path="/update-task/:id" element={<UpdateTask />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

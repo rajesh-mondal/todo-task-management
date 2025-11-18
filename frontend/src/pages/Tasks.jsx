@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import API from "../api";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
@@ -150,9 +151,15 @@ export default function Tasks() {
                           >
                             Delete
                           </button>
-                          <button className="text-blue-400 hover:text-blue-500">
+                          {/* <button className="text-blue-400 hover:text-blue-500">
                             Edit
-                          </button>
+                          </button> */}
+                          <Link
+                            to={`/update-task/${task.id}`}
+                            className="text-blue-400 hover:text-blue-500"
+                          >
+                            Edit
+                          </Link>
                         </div>
                       </td>
                     </tr>
