@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../api";
+import Footer from "../component/Footer";
+import Header from "../component/Header";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -24,6 +26,7 @@ export default function Tasks() {
 
   return (
     <div className="bg-[#191D26] min-h-screen font-[Inter] text-white">
+      <Header />
       <section className="py-10" id="tasks">
         <div className="container mx-auto px-4">
           {/* Search Box */}
@@ -171,6 +174,7 @@ export default function Tasks() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
