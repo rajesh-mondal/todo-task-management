@@ -11,12 +11,26 @@ export default function CreateTask() {
     title: "",
     description: "",
     status: "pending",
-    priority: "medium",
+    priority: "low",
   });
 
+  const [errors, setErrors] = useState({});
+
   const createTask = async () => {
-    await API.post("/tasks/create", form);
-    navigate("/");
+    setErrors({});
+
+    try {
+      const res = await API.post("/tasks/create", form);
+      if (res.data.status) {
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 422) {
+        setErrors(error.response.data.errors);
+        return;
+      }
+      alert("Task creation failed");
+    }
   };
 
   return (
@@ -41,7 +55,11 @@ export default function CreateTask() {
 
           <div className="space-y-6">
             {/* Task Title */}
-            <label className="flex flex-col gap-3 rounded-2xl border border-neutral-700 bg-[#0f1116]/70 p-5 text-sm transition focus-within:border-blue-500 focus-within:bg-[#0f1116] focus-within:shadow-lg focus-within:shadow-blue-500/10">
+            <label
+              className={`flex flex-col gap-3 rounded-2xl border p-5 text-sm transition
+              ${errors.title ? "border-red-500" : "border-neutral-700"}
+              focus-within:border-blue-500`}
+            >
               <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
                 Task Title
               </span>
@@ -51,10 +69,20 @@ export default function CreateTask() {
                 className="w-full bg-transparent text-base text-white placeholder:text-neutral-500 focus:outline-none"
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
               />
+              <span class="text-xs text-neutral-500">
+                Task title cannot be empty.
+              </span>
             </label>
+            {errors.title && (
+              <p className="text-red-500 text-xs -mt-4">{errors.title[0]}</p>
+            )}
 
             {/* Description */}
-            <label className="flex flex-col gap-3 rounded-2xl border border-neutral-700 bg-[#0f1116]/70 p-5 text-sm transition focus-within:border-blue-500 focus-within:bg-[#0f1116] focus-within:shadow-lg focus-within:shadow-blue-500/10">
+            <label
+              className={`flex flex-col gap-3 rounded-2xl border p-5 text-sm transition
+              ${errors.description ? "border-red-500" : "border-neutral-700"}
+              focus-within:border-blue-500`}
+            >
               <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
                 Description
               </span>
@@ -66,11 +94,23 @@ export default function CreateTask() {
                   setForm({ ...form, description: e.target.value })
                 }
               />
+              <span class="text-xs text-neutral-500">
+                Describe the task details and required steps.
+              </span>
             </label>
+            {errors.description && (
+              <p className="text-red-500 text-xs -mt-4">
+                {errors.description[0]}
+              </p>
+            )}
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               {/* Priority */}
-              <label className="flex flex-col gap-3 rounded-2xl border border-neutral-700 bg-[#0f1116]/70 p-5 text-sm transition focus-within:border-blue-500 focus-within:bg-[#0f1116] focus-within:shadow-lg focus-within:shadow-blue-500/10">
+              <label
+                className={`flex flex-col gap-3 rounded-2xl border p-5 text-sm transition
+                ${errors.priority ? "border-red-500" : "border-neutral-700"}
+                focus-within:border-blue-500`}
+              >
                 <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
                   Priority
                 </span>
@@ -93,10 +133,22 @@ export default function CreateTask() {
                     Low
                   </option>
                 </select>
+                <span class="text-xs text-neutral-500">
+                  The default priority level is Low.
+                </span>
               </label>
+              {errors.priority && (
+                <p className="text-red-500 text-xs -mt-4">
+                  {errors.priority[0]}
+                </p>
+              )}
 
               {/* Status */}
-              <label className="flex flex-col gap-3 rounded-2xl border border-neutral-700 bg-[#0f1116]/70 p-5 text-sm transition focus-within:border-blue-500 focus-within:bg-[#0f1116] focus-within:shadow-lg focus-within:shadow-blue-500/10">
+              <label
+                className={`flex flex-col gap-3 rounded-2xl border p-5 text-sm transition
+                ${errors.status ? "border-red-500" : "border-neutral-700"}
+                focus-within:border-blue-500`}
+              >
                 <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
                   Status
                 </span>
@@ -117,11 +169,17 @@ export default function CreateTask() {
                     Completed
                   </option>
                 </select>
+                <span class="text-xs text-neutral-500">
+                  The default status is Pending
+                </span>
               </label>
+              {errors.status && (
+                <p className="text-red-500 text-xs -mt-4">{errors.status[0]}</p>
+              )}
             </div>
           </div>
 
-          {/* Footer Buttons */}
+          {/* Buttons */}
           <div className="mt-10 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div className="text-xs text-neutral-500">
               By submitting, you confirm this task is safe to store.
