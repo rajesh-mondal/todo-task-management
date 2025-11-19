@@ -75,3 +75,9 @@ npm run dev
 ## 🚀 Project Running
 - Backend (Laravel): http://localhost:8000
 - Frontend (React): http://localhost:5173
+
+## 📄 API Documentation
+
+All API endpoints for this project are documented in Postman. You can view and test the APIs using the link below:
+
+[View API Documentation on Postman](https://documenter.getpostman.com/view/21707292/2sB3HnJeTb)
