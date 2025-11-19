@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PrivateRoute from "./component/PrivateRoute";
 import CreateTask from "./pages/CreateTask";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -9,9 +10,32 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Tasks />} />
-        <Route path="/create-task" element={<CreateTask />} />
-        <Route path="/update-task/:id" element={<UpdateTask />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Tasks />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/create-task"
+          element={
+            <PrivateRoute>
+              <CreateTask />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/update-task/:id"
+          element={
+            <PrivateRoute>
+              <UpdateTask />
+            </PrivateRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
