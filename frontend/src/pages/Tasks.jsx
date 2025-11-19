@@ -31,7 +31,7 @@ export default function Tasks() {
       <section className="py-10" id="tasks">
         <div className="container mx-auto px-4">
           {/* Search Box */}
-          <div className="p-2 flex justify-end">
+          {/* <div className="p-2 flex justify-end">
             <div className="flex">
               <div className="relative overflow-hidden rounded-lg text-gray-50 md:min-w-[380px] lg:min-w-[440px]">
                 <input
@@ -52,7 +52,7 @@ export default function Tasks() {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Task List */}
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
@@ -67,9 +67,9 @@ export default function Tasks() {
                 >
                   Add Task
                 </a>
-                <button className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold text-white">
+                {/* <button className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold text-white">
                   Delete All
-                </button>
+                </button> */}
               </div>
             </div>
 

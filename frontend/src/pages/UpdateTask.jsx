@@ -212,7 +212,7 @@ export default function UpdateTask() {
             <div className="flex justify-end gap-3 w-full md:w-auto">
               <button
                 type="button"
-                onClick={() => navigate("/tasks")}
+                onClick={() => navigate("/")}
                 className="rounded-full border border-neutral-600 px-6 py-3 text-sm font-semibold text-neutral-200 transition hover:border-neutral-500 hover:text-white"
               >
                 Cancel

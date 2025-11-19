@@ -7,13 +7,13 @@ export default function Footer() {
             Home
           </a>
           <a href="#" className="hover:text-white transition">
+            About
+          </a>
+          <a href="#" className="hover:text-white transition">
             Features
           </a>
           <a href="#" className="hover:text-white transition">
             Help & Feedback
-          </a>
-          <a href="#" className="hover:text-white transition">
-            Logout
           </a>
         </div>
         <p className="text-xs uppercase tracking-[0.3em] text-neutral-600">
