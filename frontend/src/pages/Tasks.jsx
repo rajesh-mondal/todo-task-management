@@ -84,11 +84,11 @@ export default function Tasks() {
                     <th className="p-4 pb-8 text-sm font-semibold w-full">
                       Description
                     </th>
-                    <th className="p-4 pb-8 text-sm font-semibold md:w-[150px]">
-                      Status
-                    </th>
                     <th className="p-4 pb-8 text-sm font-semibold md:w-[120px]">
                       Priority
+                    </th>
+                    <th className="p-4 pb-8 text-sm font-semibold md:w-[150px]">
+                      Status
                     </th>
                     <th className="p-4 pb-8 text-sm font-semibold md:w-[120px]">
                       Options
@@ -108,23 +108,6 @@ export default function Tasks() {
                       {/* Description */}
                       <td className="text-gray-300">{task.description}</td>
 
-                      {/* Status */}
-                      <td className="text-center">
-                        <span
-                          className={`px-3 py-1 rounded-full text-xs font-semibold uppercase
-                            ${
-                              task.status === "pending"
-                                ? "bg-yellow-600/70"
-                                : task.status === "completed"
-                                ? "bg-green-600/70"
-                                : "bg-blue-600/70"
-                            }
-                        `}
-                        >
-                          {task.status}
-                        </span>
-                      </td>
-
                       {/* Priority */}
                       <td className="text-center capitalize">
                         <span
@@ -142,24 +125,38 @@ export default function Tasks() {
                         </span>
                       </td>
 
+                      {/* Status */}
+                      <td className="text-center">
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-semibold uppercase
+                            ${
+                              task.status === "pending"
+                                ? "bg-yellow-600/70"
+                                : task.status === "completed"
+                                ? "bg-green-600/70"
+                                : "bg-blue-600/70"
+                            }
+                        `}
+                        >
+                          {task.status}
+                        </span>
+                      </td>
+
                       {/* Action Buttons */}
                       <td>
                         <div className="flex items-center justify-center space-x-3">
-                          <button
-                            onClick={() => deleteTask(task.id)}
-                            className="text-red-400 hover:text-red-500"
-                          >
-                            Delete
-                          </button>
-                          {/* <button className="text-blue-400 hover:text-blue-500">
-                            Edit
-                          </button> */}
                           <Link
                             to={`/update-task/${task.id}`}
                             className="text-blue-400 hover:text-blue-500"
                           >
                             Edit
                           </Link>
+                          <button
+                            onClick={() => deleteTask(task.id)}
+                            className="text-red-400 hover:text-red-500"
+                          >
+                            Delete
+                          </button>
                         </div>
                       </td>
                     </tr>
