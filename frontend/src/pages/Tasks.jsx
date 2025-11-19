@@ -26,7 +26,7 @@ export default function Tasks() {
   }, []);
 
   return (
-    <div className="bg-[#191D26] min-h-screen font-[Inter] text-white">
+    <div className="bg-[#0f1216] min-h-screen font-[Inter] text-white">
       <Header />
       <section className="py-10" id="tasks">
         <div className="container mx-auto px-4">
@@ -55,7 +55,7 @@ export default function Tasks() {
           </div> */}
 
           {/* Task List */}
-          <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
+          <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#0f1216] px-6 py-8 md:px-9 md:py-16">
             <div className="mb-14 items-center justify-between sm:flex">
               <h2 className="text-2xl font-semibold text-white max-sm:mb-4">
                 Your Tasks

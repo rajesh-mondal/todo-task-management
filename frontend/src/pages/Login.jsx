@@ -30,20 +30,23 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-blue-100 p-6">
-      <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8">
-        <h1 className="text-3xl font-extrabold text-center mb-6 text-blue-700">
+    <div className="min-h-screen flex items-center justify-center bg-[#0b0d11] p-6 font-[Inter] text-white">
+      <div className="w-full max-w-md rounded-2xl border border-neutral-700 bg-gradient-to-br from-[#101218]/80 to-[#0d0f14]/60 shadow-2xl shadow-black/50 backdrop-blur p-8">
+        <h1 className="text-3xl font-bold text-center mb-4 text-blue-400">
           Welcome Back
         </h1>
-        <p className="text-center text-gray-500 mb-8 text-sm">
-          Please login to continue
+
+        <p className="text-center text-neutral-400 mb-8 text-sm">
+          Login to continue managing your tasks
         </p>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
+          {/* Email */}
           <div>
             <input
-              className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full rounded-xl border border-neutral-700 bg-[#0f1116]/60 p-3 text-white placeholder:text-neutral-500 focus:border-blue-500 focus:bg-[#0f1116] focus:ring-2 focus:ring-blue-500/20 outline-none transition"
               placeholder="Email"
+              type="email"
               onChange={(e) => setEmail(e.target.value)}
             />
             {errors.email && (
@@ -51,9 +54,10 @@ export default function Login() {
             )}
           </div>
 
+          {/* Password */}
           <div>
             <input
-              className="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              className="w-full rounded-xl border border-neutral-700 bg-[#0f1116]/60 p-3 text-white placeholder:text-neutral-500 focus:border-blue-500 focus:bg-[#0f1116] focus:ring-2 focus:ring-blue-500/20 outline-none transition"
               placeholder="Password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
@@ -63,19 +67,21 @@ export default function Login() {
             )}
           </div>
 
+          {/* Login Button */}
           <button
             onClick={loginUser}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold shadow-md transition active:scale-95"
+            className="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-semibold shadow-lg shadow-blue-600/20 transition active:scale-95"
           >
             Login
           </button>
         </div>
 
-        <p className="text-center text-gray-600 mt-6 text-sm">
+        {/* Footer */}
+        <p className="text-center text-neutral-400 mt-6 text-sm">
           Don’t have an account?{" "}
           <Link
             to="/register"
-            className="text-blue-600 font-semibold hover:underline cursor-pointer"
+            className="text-blue-400 font-semibold hover:underline"
           >
             Sign up
           </Link>
